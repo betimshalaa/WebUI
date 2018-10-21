@@ -14,6 +14,10 @@ namespace WebUI.Controllers
         {
             return View();
         }
+        public IActionResult Map()
+        {
+            return View();
+        }
 
         public IActionResult About()
         {

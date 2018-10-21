@@ -2,8 +2,8 @@
 @{
     ViewData["Title"] = "Map";
 }
-<link rel="stylesheet" href="~/css/chartist.min.css" />
 
+<div id="map"></div>
 <style>
     #map {
         height: 100%;
@@ -19,8 +19,6 @@
 </style>
 
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-<script src="~/js/chartist.min.js" ></script>
-
 <script>
     var map;
     function initMap() {
@@ -31,7 +29,7 @@
                 { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
                 { elementType: 'labels.text.stroke', stylers: [{ color: '#242f3e' }] },
                 { elementType: 'labels.text.fill', stylers: [{ color: '#746855' }] },
-
+                
                 {
                     featureType: 'road',
                     elementType: 'geometry',
@@ -62,7 +60,7 @@
                     elementType: 'labels.text.fill',
                     stylers: [{ color: '#f3d19c' }]
                 },
-
+               
                 {
                     featureType: 'water',
                     elementType: 'geometry',
@@ -113,7 +111,7 @@
         "scan": 1,
         "track": 1,
         "satellite": "Toka"
-    }
+    },
     ]`;
         var infowindow = new google.maps.InfoWindow({
             content: ""
@@ -150,7 +148,7 @@
             //});
             var htmlDesc = `<div class="modals">
     <div class="modal-dialog" style="width 100%;">
-
+    
       <!-- Modal content-->
       <div class="modal-content" style="-webkit-box-shadow: 0 3px 9px white !important;
 
@@ -159,17 +157,17 @@ box-shadow: 0 3px 9px white !important;border: none !important;">
           <h4 class="modal-title">Fire Information</h4>
         </div>
         <div class="modal-body">
-          <p>`+ value.satellite + `</p>
+          <p>`+ value.satellite+`</p>
         </div>
         <div class="modal-footer" style="border-top: 1px solid white !important;">
         </div>
       </div>
-
+      
     </div>
   </div>`
             bindInfoWindow(marker, map, infowindow, htmlDesc);
         });
-
+        
     }
     function bindInfoWindow(marker, map, infowindow, description) {
         marker.addListener('click', function () {
@@ -180,7 +178,7 @@ box-shadow: 0 3px 9px white !important;border: none !important;">
             infowindow.setContent(description);
             infowindow.open(map, this);
         });
-
+       
     }
 
 </script>
