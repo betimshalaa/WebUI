@@ -1,7 +1,65 @@
 ﻿@{
     ViewData["Title"] = "About";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
 
-<p>Use this area to provide additional information.</p>
+
+<script>
+    window.onload = function () {
+
+        var options = {
+            title: {
+                text: "Desktop OS Market Share in 2017"
+            },
+            subtitles: [{
+                text: "As of November, 2017"
+            }],
+            animationEnabled: true,
+            data: [{
+                type: "pie",
+                startAngle: 40,
+                toolTipContent: "<b>{label}</b>: {y}%",
+                showInLegend: "true",
+                legendText: "{label}",
+                indexLabelFontSize: 16,
+                indexLabel: "{label} - {y}%",
+                dataPoints: [
+                    { y: 48.36, label: "Windows 7" },
+                    { y: 26.85, label: "Windows 10" },
+                    { y: 1.49, label: "Windows 8" },
+                    { y: 6.98, label: "Windows XP" },
+                    { y: 6.53, label: "Windows 8.1" },
+                    { y: 2.45, label: "Linux" },
+                    { y: 3.32, label: "Mac OS X 10.12" },
+                    { y: 4.03, label: "Others" }
+                ]
+            }]
+        };
+        $("#chartContainer").CanvasJSChart(options);
+
+    }
+</script>
+
+
+
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
