@@ -37,7 +37,8 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                @*<div id="chartContainer" style="height: 300px; width: 100%;"></div>*@
+                <div id="chartContainer" style="        height: auto;
+        min-height: 65vh;"></div>
             </div>
          
         </div>
@@ -190,7 +191,31 @@
 
         }
         function showChart() {
-            $.get('https://ecomfe.github.io/echarts-examples/public/data/asset/data/life-expectancy-table.json', function (data) {
+
+            var data =`[
+    ["Country","Brezometer AQI","Unit","Concentration"],
+    [
+            "China",
+             85,
+            "ppb",
+             285.4
+            ]
+            ,
+
+    [
+        "Japan",
+         91,
+        "ppb",
+         258
+        ],
+        [
+            "Australia",
+             68,
+            "ppb",
+             269.27
+            ]
+    
+]`
                 var myChart = echarts.init(document.getElementById('chartContainer'))
                 var sizeValue = '57%';
                 var symbolSize = 2.5;
@@ -210,26 +235,26 @@
                         { left: sizeValue, top: sizeValue }
                     ],
                     xAxis: [
-                        { type: 'value', gridIndex: 0, name: 'Income', axisLabel: { rotate: 50, interval: 0 } },
+                        { type: 'value', gridIndex: 0, name: 'Brezometer AQI', axisLabel: { rotate: 50, interval: 0 } },
                         { type: 'category', gridIndex: 1, name: 'Country', boundaryGap: false, axisLabel: { rotate: 50, interval: 0 } },
-                        { type: 'value', gridIndex: 2, name: 'Income', axisLabel: { rotate: 50, interval: 0 } },
-                        { type: 'value', gridIndex: 3, name: 'Life Expectancy', axisLabel: { rotate: 50, interval: 0 } }
+                        { type: 'value', gridIndex: 2, name: 'Country', axisLabel: { rotate: 50, interval: 0 } },
+                        { type: 'value', gridIndex: 3, name: 'Concentration', axisLabel: { rotate: 50, interval: 0 } }
                     ],
                     yAxis: [
-                        { type: 'value', gridIndex: 0, name: 'Life Expectancy' },
-                        { type: 'value', gridIndex: 1, name: 'Income' },
-                        { type: 'value', gridIndex: 2, name: 'Population' },
-                        { type: 'value', gridIndex: 3, name: 'Population' }
+                        { type: 'value', gridIndex: 0, name: 'Unit' },
+                        { type: 'value', gridIndex: 1, name: 'Brezometer AQI' },
+                        { type: 'value', gridIndex: 2, name: 'Concentration' },
+                        { type: 'value', gridIndex: 3, name: 'Unit' }
                     ],
                     dataset: {
                         dimensions: [
-                            'Income',
-                            'Life Expectancy',
-                            'Population',
                             'Country',
-                            { name: 'Year', type: 'ordinal' }
+                            'Brezometer AQI',
+                            'Unit',
+                            'Concentration',
+                            
                         ],
-                        source: data
+                        source: JSON.parse(data)
                     },
                     series: [
                         {
@@ -238,9 +263,9 @@
                             xAxisIndex: 0,
                             yAxisIndex: 0,
                             encode: {
-                                x: 'Income',
-                                y: 'Life Expectancy',
-                                tooltip: [0, 1, 2, 3, 4]
+                                x: 'Brezometer AQI',
+                                y: 'Unit',
+                                tooltip: [0, 1, 2, 3]
                             }
                         },
                         {
@@ -250,8 +275,8 @@
                             yAxisIndex: 1,
                             encode: {
                                 x: 'Country',
-                                y: 'Income',
-                                tooltip: [0, 1, 2, 3, 4]
+                                y: 'Brezometer AQI',
+                                tooltip: [0, 1, 2, 3]
                             }
                         },
                         {
@@ -260,9 +285,9 @@
                             xAxisIndex: 2,
                             yAxisIndex: 2,
                             encode: {
-                                x: 'Income',
-                                y: 'Population',
-                                tooltip: [0, 1, 2, 3, 4]
+                                x: 'Country',
+                                y: 'Concentration',
+                                tooltip: [0, 1, 2, 3]
                             }
                         },
                         {
@@ -271,16 +296,15 @@
                             xAxisIndex: 3,
                             yAxisIndex: 3,
                             encode: {
-                                x: 'Life Expectancy',
-                                y: 'Population',
-                                tooltip: [0, 1, 2, 3, 4]
+                                x: 'Concentration',
+                                y: 'Unit',
+                                tooltip: [0, 1, 2, 3]
                             }
                         }
                     ]
                 };
 
                 myChart.setOption(option);
-            });
 
         }
 
