@@ -39,8 +39,15 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <div id="chartContainer" style="        height: auto;
-        min-height: 65vh;"></div>
+                <div id="chartContainer" style="height: auto;
+                          min-height: 65vh;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            
+                        </div>
+
+                    </div>
+                </div>
             </div>
          
         </div>
@@ -192,121 +199,9 @@
             ////});
 
         }
+
         function showChart() {
 
-            var data =`[
-    ["Country","Brezometer AQI","Unit","Concentration"],
-    [
-            "China",
-             85,
-            "ppb",
-             285.4
-            ]
-            ,
-
-    [
-        "Japan",
-         91,
-        "ppb",
-         258
-        ],
-        [
-            "Australia",
-             68,
-            "ppb",
-             269.27
-            ]
-    
-]`
-                var myChart = echarts.init(document.getElementById('chartContainer'))
-                var sizeValue = '57%';
-                var symbolSize = 2.5;
-                option = {
-                    legend: {},
-                    tooltip: {},
-                    toolbox: {
-                        left: 'center',
-                        feature: {
-                            dataZoom: {}
-                        }
-                    },
-                    grid: [
-                        { right: sizeValue, bottom: sizeValue },
-                        { left: sizeValue, bottom: sizeValue },
-                        { right: sizeValue, top: sizeValue },
-                        { left: sizeValue, top: sizeValue }
-                    ],
-                    xAxis: [
-                        { type: 'value', gridIndex: 0, name: 'Brezometer AQI', axisLabel: { rotate: 50, interval: 0 } },
-                        { type: 'category', gridIndex: 1, name: 'Country', boundaryGap: false, axisLabel: { rotate: 50, interval: 0 } },
-                        { type: 'value', gridIndex: 2, name: 'Country', axisLabel: { rotate: 50, interval: 0 } },
-                        { type: 'value', gridIndex: 3, name: 'Concentration', axisLabel: { rotate: 50, interval: 0 } }
-                    ],
-                    yAxis: [
-                        { type: 'value', gridIndex: 0, name: 'Unit' },
-                        { type: 'value', gridIndex: 1, name: 'Brezometer AQI' },
-                        { type: 'value', gridIndex: 2, name: 'Concentration' },
-                        { type: 'value', gridIndex: 3, name: 'Unit' }
-                    ],
-                    dataset: {
-                        dimensions: [
-                            'Country',
-                            'Brezometer AQI',
-                            'Unit',
-                            'Concentration',
-                            
-                        ],
-                        source: JSON.parse(data)
-                    },
-                    series: [
-                        {
-                            type: 'scatter',
-                            symbolSize: symbolSize,
-                            xAxisIndex: 0,
-                            yAxisIndex: 0,
-                            encode: {
-                                x: 'Brezometer AQI',
-                                y: 'Unit',
-                                tooltip: [0, 1, 2, 3]
-                            }
-                        },
-                        {
-                            type: 'scatter',
-                            symbolSize: symbolSize,
-                            xAxisIndex: 1,
-                            yAxisIndex: 1,
-                            encode: {
-                                x: 'Country',
-                                y: 'Brezometer AQI',
-                                tooltip: [0, 1, 2, 3]
-                            }
-                        },
-                        {
-                            type: 'scatter',
-                            symbolSize: symbolSize,
-                            xAxisIndex: 2,
-                            yAxisIndex: 2,
-                            encode: {
-                                x: 'Country',
-                                y: 'Concentration',
-                                tooltip: [0, 1, 2, 3]
-                            }
-                        },
-                        {
-                            type: 'scatter',
-                            symbolSize: symbolSize,
-                            xAxisIndex: 3,
-                            yAxisIndex: 3,
-                            encode: {
-                                x: 'Concentration',
-                                y: 'Unit',
-                                tooltip: [0, 1, 2, 3]
-                            }
-                        }
-                    ]
-                };
-
-                myChart.setOption(option);
 
         }
 
