@@ -2,35 +2,39 @@
     ViewData["Title"] = "About";
 }
 
-
 <script>
     window.onload = function () {
 
         var options = {
-            title: {
-                text: "Desktop OS Market Share in 2017"
-            },
-            subtitles: [{
-                text: "As of November, 2017"
-            }],
             animationEnabled: true,
+            title: {
+                text: "Monthly Sales - 2017"
+            },
+            axisX: {
+                valueFormatString: "MMM"
+            },
+            axisY: {
+                title: "Sales (in USD)",
+                prefix: "$",
+                includeZero: false
+            },
             data: [{
-                type: "pie",
-                startAngle: 40,
-                toolTipContent: "<b>{label}</b>: {y}%",
-                showInLegend: "true",
-                legendText: "{label}",
-                indexLabelFontSize: 16,
-                indexLabel: "{label} - {y}%",
+                yValueFormatString: "$#,###",
+                xValueFormatString: "MMMM",
+                type: "spline",
                 dataPoints: [
-                    { y: 48.36, label: "Windows 7" },
-                    { y: 26.85, label: "Windows 10" },
-                    { y: 1.49, label: "Windows 8" },
-                    { y: 6.98, label: "Windows XP" },
-                    { y: 6.53, label: "Windows 8.1" },
-                    { y: 2.45, label: "Linux" },
-                    { y: 3.32, label: "Mac OS X 10.12" },
-                    { y: 4.03, label: "Others" }
+                    { x: new Date(2017, 0), y: 25060 },
+                    { x: new Date(2017, 1), y: 27980 },
+                    { x: new Date(2017, 2), y: 33800 },
+                    { x: new Date(2017, 3), y: 49400 },
+                    { x: new Date(2017, 4), y: 40260 },
+                    { x: new Date(2017, 5), y: 33900 },
+                    { x: new Date(2017, 6), y: 48000 },
+                    { x: new Date(2017, 7), y: 31500 },
+                    { x: new Date(2017, 8), y: 32300 },
+                    { x: new Date(2017, 9), y: 42000 },
+                    { x: new Date(2017, 10), y: 52160 },
+                    { x: new Date(2017, 11), y: 49400 }
                 ]
             }]
         };
@@ -38,7 +42,6 @@
 
     }
 </script>
-
 
 
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
