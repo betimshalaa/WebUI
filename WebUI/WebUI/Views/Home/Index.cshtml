@@ -2,25 +2,37 @@
 @{
     ViewData["Title"] = "Map";
 }
-<link rel="stylesheet" href="~/css/chartist.min.css" />
 
+<div id="map"></div>
+<script src="~/lib/jquery/dist/jquery.js"></script>
 <style>
     #map {
-        height: 100%;
+        width: 100%;
         position: static !important;
         overflow: hidden !important;
     }
-
-    html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
 </style>
+<div id="myModal" class="modal fade" role="dialog" >
+    <div class="modal-dialog">
 
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-<script src="~/js/chartist.min.js" ></script>
+        <!-- Modal content-->
+        <div class="modal-content" style="width:60%;height:665px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body" style="width:100%;height:665px;">
+                <div id="chartContainer" style="height:100%"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
 
+    </div>
+</div>
+@section Scripts{
+<script src="~/js/echarts.js"></script>
 <script>
     var map;
     function initMap() {
@@ -82,41 +94,41 @@
 
         });
         var data = `[
-    {
-        "latitude": 46.485,
-        "longitude": 49.417,
-        "acq_date": 20181013,
-        "acq_time": 2255,
-        "brightness": 317.8,
-        "daynight": "N",
-        "bright_t31": 277.4,
-        "version": "6.0NRT",
-        "instrument": "MODIS",
-        "frp": 19.8,
-        "confidence": 76,
-        "scan": 1,
-        "track": 1,
-        "satellite": "Hana"
-    },
-    {
-        "latitude": 46.494,
-        "longitude": 49.364,
-        "acq_date": 20181013,
-        "acq_time": 2255,
-        "brightness": 324.3,
-        "daynight": "N",
-        "bright_t31": 277.4,
-        "version": "6.0NRT",
-        "instrument": "MODIS",
-        "frp": 28,
-        "confidence": 88,
-        "scan": 1,
-        "track": 1,
-        "satellite": "Toka"
-    }
-    ]`;
+                {
+                    "latitude": 46.485,
+                    "longitude": 49.417,
+                    "acq_date": 20181013,
+                    "acq_time": 2255,
+                    "brightness": 317.8,
+                    "daynight": "N",
+                    "bright_t31": 277.4,
+                    "version": "6.0NRT",
+                    "instrument": "MODIS",
+                    "frp": 19.8,
+                    "confidence": 76,
+                    "scan": 1,
+                    "track": 1,
+                    "satellite": "Hana"
+                },
+                {
+                    "latitude": 46.494,
+                    "longitude": 49.364,
+                    "acq_date": 20181013,
+                    "acq_time": 2255,
+                    "brightness": 324.3,
+                    "daynight": "N",
+                    "bright_t31": 277.4,
+                    "version": "6.0NRT",
+                    "instrument": "MODIS",
+                    "frp": 28,
+                    "confidence": 88,
+                    "scan": 1,
+                    "track": 1,
+                    "satellite": "Toka"
+                }
+                ]`;
         var infowindow = new google.maps.InfoWindow({
-            content: ""
+            
         });
         $.each(JSON.parse(data), function (index, value) {
 
@@ -148,41 +160,117 @@
             //    center: { lat: value.latitude, lng: value.longitude },
             //    radius: value.confidence * 10 + 100
             //});
-            var htmlDesc = `<div class="modals">
-    <div class="modal-dialog" style="width 100%;">
-
-      <!-- Modal content-->
-      <div class="modal-content" style="-webkit-box-shadow: 0 3px 9px white !important;
-
-box-shadow: 0 3px 9px white !important;border: none !important;">
-        <div class="modal-header">
-          <h4 class="modal-title">Fire Information</h4>
-        </div>
-        <div class="modal-body">
-          <p>`+ value.satellite + `</p>
-        </div>
-        <div class="modal-footer" style="border-top: 1px solid white !important;">
-        </div>
-      </div>
-
-    </div>
-  </div>`
-            bindInfoWindow(marker, map, infowindow, htmlDesc);
+            bindInfoWindow(marker, map, infowindow, "");
         });
+    }
+    function bindInfoWindow(marker, map, infowindow, divi) {
+        marker.addListener('click', function () {
+            $('#myModal').modal('show');
+            showChart();
+
+        });
+        //marker.addListener('mouseover', function () {
+        ////    infowindow.setContent(divi);
+        ////    infowindow.open(map, this);
+        ////});
 
     }
-    function bindInfoWindow(marker, map, infowindow, description) {
-        marker.addListener('click', function () {
-            infowindow.setContent(description);
-            infowindow.open(map, this);
-        });
-        marker.addListener('mouseover', function () {
-            infowindow.setContent(description);
-            infowindow.open(map, this);
-        });
+    function showChart() {
+        $.get('https://ecomfe.github.io/echarts-examples/public/data/asset/data/life-expectancy-table.json', function (data) {
+            var myChart = echarts.init(document.getElementById('chartContainer'))
+            var sizeValue = '57%';
+            var symbolSize = 2.5;
+            option = {
+                legend: {},
+                tooltip: {},
+                toolbox: {
+                    left: 'center',
+                    feature: {
+                        dataZoom: {}
+                    }
+                },
+                grid: [
+                    { right: sizeValue, bottom: sizeValue },
+                    { left: sizeValue, bottom: sizeValue },
+                    { right: sizeValue, top: sizeValue },
+                    { left: sizeValue, top: sizeValue }
+                ],
+                xAxis: [
+                    { type: 'value', gridIndex: 0, name: 'Income', axisLabel: { rotate: 50, interval: 0 } },
+                    { type: 'category', gridIndex: 1, name: 'Country', boundaryGap: false, axisLabel: { rotate: 50, interval: 0 } },
+                    { type: 'value', gridIndex: 2, name: 'Income', axisLabel: { rotate: 50, interval: 0 } },
+                    { type: 'value', gridIndex: 3, name: 'Life Expectancy', axisLabel: { rotate: 50, interval: 0 } }
+                ],
+                yAxis: [
+                    { type: 'value', gridIndex: 0, name: 'Life Expectancy' },
+                    { type: 'value', gridIndex: 1, name: 'Income' },
+                    { type: 'value', gridIndex: 2, name: 'Population' },
+                    { type: 'value', gridIndex: 3, name: 'Population' }
+                ],
+                dataset: {
+                    dimensions: [
+                        'Income',
+                        'Life Expectancy',
+                        'Population',
+                        'Country',
+                        { name: 'Year', type: 'ordinal' }
+                    ],
+                    source: data
+                },
+                series: [
+                    {
+                        type: 'scatter',
+                        symbolSize: symbolSize,
+                        xAxisIndex: 0,
+                        yAxisIndex: 0,
+                        encode: {
+                            x: 'Income',
+                            y: 'Life Expectancy',
+                            tooltip: [0, 1, 2, 3, 4]
+                        }
+                    },
+                    {
+                        type: 'scatter',
+                        symbolSize: symbolSize,
+                        xAxisIndex: 1,
+                        yAxisIndex: 1,
+                        encode: {
+                            x: 'Country',
+                            y: 'Income',
+                            tooltip: [0, 1, 2, 3, 4]
+                        }
+                    },
+                    {
+                        type: 'scatter',
+                        symbolSize: symbolSize,
+                        xAxisIndex: 2,
+                        yAxisIndex: 2,
+                        encode: {
+                            x: 'Income',
+                            y: 'Population',
+                            tooltip: [0, 1, 2, 3, 4]
+                        }
+                    },
+                    {
+                        type: 'scatter',
+                        symbolSize: symbolSize,
+                        xAxisIndex: 3,
+                        yAxisIndex: 3,
+                        encode: {
+                            x: 'Life Expectancy',
+                            y: 'Population',
+                            tooltip: [0, 1, 2, 3, 4]
+                        }
+                    }
+                ]
+            };
 
+            myChart.setOption(option);
+        });
+       
     }
 
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDfytPh8CfSlcmsoCWeoDZlO0ddKNy7mM&callback=initMap"
         type="text/javascript"></script>
+}
