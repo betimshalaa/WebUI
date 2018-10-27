@@ -4,12 +4,14 @@
 }
 
 <div id="map"></div>
-<script src="~/lib/jquery/dist/jquery.js"></script>
+
 <style>
     #map {
+        min-height: 100vh;
+        padding: 0;
         width: 100%;
-        position: static !important;
-        overflow: hidden !important;
+        overflow: relative !important;
+        position: relative !important;
     }
 
 
@@ -34,7 +36,7 @@
     <div class="modal-dialog">
 
         <!-- Modal content-->
-        <div class="modal-content">
+        <div class="modal-content" >
             <div class="modal-header" style="border:0 !important;">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h3 style="color:white; text-align:center" class="modal-title">Modal Header</h3>
@@ -106,19 +108,19 @@
                 center: { lat: 46.483, lng: 49.43 },
                 zoom: 2,
                 styles: [
-                    { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
+                    { elementType: 'geometry', stylers: [{ color: '#2D3035' }] },
                     { elementType: 'labels.text.stroke', stylers: [{ color: '#242f3e' }] },
                     { elementType: 'labels.text.fill', stylers: [{ color: '#746855' }] },
 
                     {
                         featureType: 'road',
                         elementType: 'geometry',
-                        stylers: [{ color: '#38414e' }]
+                        stylers: [{ color: '#2D3035' }]
                     },
                     {
                         featureType: 'road',
                         elementType: 'geometry.stroke',
-                        stylers: [{ color: '#212a37' }]
+                        stylers: [{ color: '#2D3035' }]
                     },
                     {
                         featureType: 'road',
@@ -144,7 +146,7 @@
                     {
                         featureType: 'water',
                         elementType: 'geometry',
-                        stylers: [{ color: '#17263c' }]
+                        stylers: [{ color: '#22252A' }]
                     },
                     {
                         featureType: 'water',
@@ -154,7 +156,7 @@
                     {
                         featureType: 'water',
                         elementType: 'labels.text.stroke',
-                        stylers: [{ color: '#17263c' }]
+                        stylers: [{ color: '#22252A' }]
                     },
                 ]
 
