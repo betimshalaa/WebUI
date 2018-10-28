@@ -11,20 +11,15 @@
 
 
 .modal-dialog {
-    width: 80%;
-    height: 80vh;
-    vertical-align: middle;
-    margin: 5% 10% 10% 10%;
-    padding: 0;
+   width:100%;
 }
 
 .modal-content {
-    height: auto;
-    min-height: 80vh;
-    border-radius: 5px;
-    vertical-align: middle;
-    background-color: #242F3E;
-    border-bottom: 0;
+  
+}
+
+.img-map {
+    width:50%;
 }
 
 
