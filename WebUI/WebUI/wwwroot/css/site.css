@@ -1,4 +1,31 @@
-﻿.at-section__title {
+﻿
+/* ==================================== Index Page =========================================================================*/
+
+#map {
+    min-height: 100vh;
+    padding: 0;
+    width: 100%;
+    overflow: relative !important;
+    position: relative !important;
+}
+
+
+.modal-dialog {
+   width:100%;
+}
+
+.modal-content {
+  
+}
+
+.img-map {
+    width:50%;
+}
+
+
+/* ==================================== About Page =========================================================================*/
+
+.at-section__title {
     margin: 0 0 70px;
     color: #BFC1C4;
     font-family: "Roboto", sans-serif;
@@ -20,6 +47,7 @@
     min-width: 100%;
     flex-basis: 100%;
   }
+  
   .at-grid[data-column="2"] .at-column {
     width: 50%;
     max-width: 50%;
